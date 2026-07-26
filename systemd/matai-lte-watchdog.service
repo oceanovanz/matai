@@ -1,0 +1,13 @@
+[Unit]
+Description=Matai LTE Connection Watchdog
+After=matai-lte.service
+Requires=matai-lte.service
+
+[Service]
+Type=simple
+ExecStart=/usr/local/sbin/matai-lte-watchdog.sh
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
