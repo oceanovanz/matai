@@ -1,0 +1,14 @@
+[Unit]
+Description=Matai MAVLink to NMEA GPS Bridge
+After=mavlink-router.service docker.service
+Requires=mavlink-router.service
+
+[Service]
+Type=simple
+ExecStart=/opt/matai-gps-bridge/venv/bin/python /opt/matai-gps-bridge/mavlink_to_nmea.py
+Restart=always
+RestartSec=5
+User=root
+
+[Install]
+WantedBy=multi-user.target
