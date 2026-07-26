@@ -1,0 +1,14 @@
+[Unit]
+Description=Matai SIM7600 LTE Connection
+After=network.target
+Wants=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/matai-lte-start.sh
+RemainAfterExit=yes
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
