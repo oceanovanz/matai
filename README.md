@@ -46,6 +46,4 @@ See [docs/SETUP.md](docs/SETUP.md) for the complete installation and validation 
 - `systemd/matai-lte-watchdog.service` — LTE watchdog service
 - `examples/mavlink-router.conf` — MAVLink Router configuration template
 
-## Important
 
-Replace example NetBird IP addresses with the actual ground-station address assigned to your system. Do not commit SIM credentials, API keys, passwords, or private tokens.
