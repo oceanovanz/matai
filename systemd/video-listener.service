@@ -1,0 +1,26 @@
+[Unit]
+Description=Video Control Listener
+After=network-online.target netbird.service
+Wants=network-online.target
+Requires=netbird.service
+
+[Service]
+Type=simple
+
+User=oceanovacam
+Group=oceanovacam
+
+WorkingDirectory=/home/oceanovacam/matai/scripts/
+
+ExecStart=/usr/bin/python3 /home/oceanovacam/matai/scripts/video_listener.py
+Environment=PYTHONUNBUFFERED=1
+
+Restart=always
+RestartSec=5
+
+# Make logs appear in journalctl
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
