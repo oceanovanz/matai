@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-OUTPUT_CONF="mavlink-router/main.conf"
+OUTPUT_CONF="/etc/mavlink-router/main.conf"
 TMP_CONF="/tmp/mavlink-router.conf.tmp"
 
 cat << 'EOF' > "$TMP_CONF"
@@ -13,11 +13,12 @@ MavlinkDialect = common
 [UartEndpoint pixhawk]
 Device = /dev/ttyACM0
 Baud = 115200
+
 EOF
 
 netbird status --json 2>/dev/null | jq -r '
     .peers.details[]
-    | select((.hostname // .fqdn // "") #| contains("GS"))
+    | select((.hostname // .fqdn // "") | contains("gs"))
     | select(.ip != null or .netbirdIp != null)
     |
     "[UdpEndpoint \(.hostname // .fqdn // "n/a")]

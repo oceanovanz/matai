@@ -156,13 +156,17 @@ The route should use `wt0`.
 
 ## 6. MAVLink Router
 
-Install MAVLink Router and configure the Pixhawk serial endpoint plus a UDP destination for the Windows ground station.
+Install MAVLink Router. Use `generate_mav_router_conf.sh` script to automatically configure the Pixhawk serial endpoint and UDP destinations for ground stations.
 
-Use `examples/mavlink-router.conf` as the template, replacing:
+```bash
+sudo ./scripts/generate_mav_router_conf.sh
+```
 
-- `GROUND_STATION_NETBIRD_IP`
-- the Pixhawk device path if necessary
-- the baud rate if necessary
+Verify:
+
+```bash
+cat etc/mavlink-router/main.conf
+```
 
 Enable and check:
 
