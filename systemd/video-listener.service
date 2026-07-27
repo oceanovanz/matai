@@ -10,9 +10,9 @@ Type=simple
 User=oceanovacam
 Group=oceanovacam
 
-WorkingDirectory=/home/oceanovacam/matai/scripts/
+WorkingDirectory=/home/oceanovacam/oceanova
 
-ExecStart=/usr/bin/python3 /home/oceanovacam/matai/scripts/video_listener.py
+ExecStart=/usr/bin/python3 /home/oceanovacam/oceanova/video_listener.py
 Environment=PYTHONUNBUFFERED=1
 
 Restart=always

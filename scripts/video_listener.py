@@ -15,14 +15,14 @@ def create_udp_pipeline(ip, port):
         "-e",
         "libcamerasrc",
         "!",
-        "queue",
+        "queue", 
+        "max-size-buffers=4",
+        "leaky=downstream",
         "!",
-        "video/x-raw,format=I420,width=1280,height=720,framerate=30/1",
+        "video/x-raw,format=I420,width=960,height=540,framerate=20/1",
         "!",
         "v4l2h264enc",
-        "extra-controls=controls,video_bitrate=3000000,h264_i_frame_period=30",
-        "!",
-        "video/x-h264,profile=baseline,level=(string)3.1",
+        "extra-controls=controls,video_bitrate=2500000,h264_i_frame_period=30",
         "!",
         "h264parse",
         "config-interval=1",
@@ -44,11 +44,13 @@ def create_srt_pipeline(port):
         "libcamerasrc",
         "!",
         "queue",
+        "max-size-buffers=4",
+        "leaky=downstream",
         "!",
-        "video/x-raw,format=I420,width=1280,height=720,framerate=30/1",
+        "video/x-raw,format=I420,width=960,height=540,framerate=20/1",
         "!",
         "v4l2h264enc",
-        "extra-controls=controls,video_bitrate=3000000,h264_i_frame_period=30",
+        "extra-controls=controls,video_bitrate=2500000,h264_i_frame_period=30",
         "!",
         "video/x-h264,profile=baseline,level=(string)3.1",
         "!",
@@ -59,7 +61,7 @@ def create_srt_pipeline(port):
         "alignment=7",
         "!",
         "srtsink",
-        f"uri=srt://:{port}?mode=listener",
+        f"uri=srt://:{port}?mode=listener&latency=120",
     ]
 
 
@@ -128,3 +130,4 @@ def main():
 if __name__ == "__main__":
 
     main()
+
