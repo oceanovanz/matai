@@ -15,6 +15,7 @@ This repository documents the working Raspberry Pi 4 deployment used on Oceanova
 - Cerulean sonar on a dedicated Ethernet subnet
 - SonarView in Docker with automatic restart
 - Camera RTP/H.264 stream to the ground station
+- Field recording, diagnostics, recovery, and post-mission data handling runbook
 
 ## Port map
 
@@ -24,6 +25,7 @@ This repository documents the working Raspberry Pi 4 deployment used on Oceanova
 | MAVLink Router local TCP server | TCP | 5760 |
 | SonarView GPS NMEA input | UDP | 10110 |
 | SonarView web interface | TCP | 7077 |
+| Cerulean Surveyor data | TCP | 62312 |
 | Camera stream | UDP | 5600 |
 | SSH | TCP | 22 |
 
@@ -49,9 +51,13 @@ Pixhawk GPS
 
 The GPS forwarder runs as `matai-gps-bridge.service` and starts automatically at boot.
 
-## Installation guide
+For recording, both the Generic GPS device and the Cerulean Surveyor must be included in the active SonarView session plan. Defining the GPS device alone is not sufficient if its device ID is omitted from the plan.
 
-See [docs/SETUP.md](docs/SETUP.md) for the complete installation and validation procedure.
+## Documentation
+
+- [Installation and validation guide](docs/SETUP.md)
+- [Field operations runbook](docs/FIELD_OPERATIONS.md)
+- [SonarView session reference](examples/sonarview-session.json)
 
 ## Included files
 
@@ -62,3 +68,5 @@ See [docs/SETUP.md](docs/SETUP.md) for the complete installation and validation 
 - `systemd/matai-lte-watchdog.service` — LTE watchdog service
 - `systemd/matai-gps-bridge.service` — persistent SonarView GPS forwarder
 - `examples/mavlink-router.conf` — MAVLink Router configuration template
+- `examples/sonarview-session.json` — reference sonar and GPS recording plan
+- `docs/FIELD_OPERATIONS.md` — deployment, diagnostics, recovery, and data handling procedures
