@@ -1,0 +1,7 @@
+module load ntrip
+ntrip set caster :positionz-rt.linz.govt.nz
+ntrip set port 2101
+ntrip set mountpoint WELL00NZL0
+ntrip set username oceanova
+ntrip set password Tuakau1324
+ntrip start

@@ -202,7 +202,39 @@ New-NetFirewallRule `
 
 Only one application can bind the same UDP port unless socket sharing is explicitly supported. Close extra Mission Planner or QGroundControl instances if Windows reports that the socket address is already in use.
 
-## 7. Configure the sonar Ethernet interface
+## 7. MAVProxy & NTRIP
+
+1. Update and Install Dependences
+
+```bash
+sudo apt update
+sudo apt install -y python3-dev python3-pip python3-opencv python3-matplotlib python3-lxml python3-pygame git
+```
+
+2. Install MAVProxy
+
+```bash
+sudo pip3 install MAVProxy
+```
+
+3. Create systemd service
+
+```bash
+sudo install -m 0755 scripts/.mavinit.src /usr/local/sbin/.mavinit.src
+sudo install -m 0644 systemd/maxproxy.service /etc/systemd/system/maxproxy-ntrip.service
+
+sudo systemctl daemon-reload
+sudo systemctl enable --now maxproxy.service
+```
+
+4. Check status and view logs
+
+```bash
+sudo systemctl status mavproxy-ntrip.service
+journalctl -u mavproxy-ntrip.service -f
+```
+
+## 8. Configure the sonar Ethernet interface
 
 Create a persistent NetworkManager profile:
 
@@ -235,7 +267,7 @@ Expected route:
 
 There must be no default gateway on `eth0`.
 
-## 8. Install Docker
+## 9. Install Docker
 
 ```bash
 sudo apt update
@@ -275,7 +307,7 @@ docker version
 docker run --rm hello-world
 ```
 
-## 9. Install SonarView
+## 10. Install SonarView
 
 ```bash
 sudo mkdir -p /usr/SonarView
@@ -307,7 +339,7 @@ http://PI_NETBIRD_IP:7077
 
 The `--restart unless-stopped` policy makes SonarView return automatically after reboot.
 
-## 10. Reboot validation
+## 11. Reboot validation
 
 ```bash
 sudo reboot

@@ -1,0 +1,13 @@
+[Unit]
+Description=MAVProxy NTRIP Client Service
+After=network-online.target mavlink-router.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/mavproxy.py --master=tcp:127.0.0.1:5760 --cmd="script /usr/local/sbin/.mavinit.scr" --nowait --nodefault
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
